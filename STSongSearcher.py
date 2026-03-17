@@ -1,16 +1,19 @@
-# TODOs as of 2026-03-17 21:57, most to least priority:
+# you need to replace these with your own tokens. it's up here so it's easy to find
+SPOTIFY_CLIENT_ID = "PUT YOUR SPOTIFY CLIENT ID HERE"
+SPOTIFY_SECRET_KEY = "PUT YOUR SPOTIFY SECRET KEY HERE"
+DISCOGS_TOKEN = "PUT YOUR DISCORD USER TOKEN HERE"
 
-# possible TODO: figure out how to search just tracks on bandcamp without it timing out
+
+
+
+
+
+
 
 
 # i know it's really bad practice to put any code before imports, but otherwise it's delayed showing up
 # which defeats the entire purpose of this print
 print("Initialising...")
-
-# you need to replace these with your own tokens. it's up here so it's easy to find
-SPOTIFY_CLIENT_ID = "PUT YOUR SPOTIFY CLIENT ID HERE"
-SPOTIFY_SECRET_KEY = "PUT YOUR SPOTIFY SECRET KEY HERE"
-DISCOGS_TOKEN = "PUT YOUR DISCORD USER TOKEN HERE"
 
 
 # imports
