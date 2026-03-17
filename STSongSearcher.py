@@ -7,6 +7,11 @@
 # which defeats the entire purpose of this print
 print("Initialising...")
 
+# you need to replace these with your own tokens. it's up here so it's easy to find
+SPOTIFY_CLIENT_ID = "PUT YOUR SPOTIFY CLIENT ID HERE"
+SPOTIFY_SECRET_KEY = "PUT YOUR SPOTIFY SECRET KEY HERE"
+DISCOGS_TOKEN = "PUT YOUR DISCORD USER TOKEN HERE"
+
 
 # imports
 import os
@@ -223,14 +228,6 @@ def youtubeSearch(inp):
 
 
 try:
-    
-    # variables
-    # these can be put in the relevant lines but i may as well keep them here so i know what's what
-    # you need to replace these with your own tokens
-    SPOTIFY_CLIENT_ID = "PUT YOUR SPOTIFY CLIENT ID HERE"
-    SPOTIFY_SECRET_KEY = "PUT YOUR SPOTIFY SECRET KEY HERE"
-    DISCOGS_TOKEN = "PUT YOUR DISCORD USER TOKEN HERE"
-
     # initialising the clients
     # youtube doesn't need initialising bc it's not using the api
     # technically bandcamp also isn't using the api (because there isn't an api) but it still needs initialising
