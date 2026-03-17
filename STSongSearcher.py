@@ -108,7 +108,6 @@ def findRandomFromSearch():
             randomResult = results[randomInteger]
         except:
             print("Error - try again. (This is usually a bug with the Discogs API.)\n")
-            continue
         else:
             releaseFullName = getFullName(randomResult, typeC)
             resultURL = getURL(randomResult, typeC)
