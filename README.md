@@ -27,3 +27,5 @@ I don't really want to implement OAuth, so this is the next best option.
 5. Run `STSongSearcher.py` and follow the instructions.
 
 The program will create a new folder for each release in the same location as the program, and text files within the release's folder (including an `--- info.txt` file with basic identifying info about the release). Each text file is named with the scheme `[Artist Name] - [Track Title].txt` and contains the top five results from each platform searched.
+
+If it seems a search is taking a long time, wait a few minutes. If it still doesn't complete, press Ctrl+C to go back to the menu.
