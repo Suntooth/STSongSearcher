@@ -3,6 +3,9 @@ Ever looked at a Discogs release and gone "damn, I wonder how many of these song
 
 This program grabs the tracklist of a Discogs release, then searches each song on Spotify, Bandcamp, and YouTube, logging the results in a text file. It can either get a random release from a search page (with all the usual Discogs filters, like filtering to a specific artist, barcode, or searching for a specific track name) or you can enter a release ID (Master Release or a normal release).
 
+## Shameless self-promotion
+If you're looking at this of your own volition, you're probably at least a little interested in obscure media. If yes, then take a look at **[Destruction Media Archive](https://www.youtube.com/@destructionmediaarchive)** :]
+
 ## Requirements
 This program is confirmed to work in Python 3.14.3. Any other versions may or may not work.
 
