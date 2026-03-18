@@ -24,8 +24,8 @@ import traceback
 import discogs_client
 from time import sleep
 from random import randint
-from spotify_client import SpotifyClient
 from py_bandcamp import BandCamp
+from spotify_client import SpotifyClient
 from youtube_search import YoutubeSearch
 
 
@@ -229,112 +229,108 @@ def youtubeSearch(inp):
         txt.write(toWrite + "\n")
 
 
-try:
-    # initialising the clients
-    # youtube doesn't need initialising bc it's not using the api
-    # technically bandcamp also isn't using the api (because there isn't an api) but it still needs initialising
-    d = discogs_client.Client("STSongSearcher/1.0.0-public", user_token=DISCOGS_TOKEN)
-    sp = SpotifyClient(SPOTIFY_CLIENT_ID, SPOTIFY_SECRET_KEY, identifier='STSongSearcher/1.0.0-public')
-    bc = BandCamp()
+# initialising the clients
+# youtube doesn't need initialising bc it's not using the api
+# technically bandcamp also isn't using the api (because there isn't an api) but it still needs initialising
+d = discogs_client.Client("STSongSearcher/1.0.0-public", user_token=DISCOGS_TOKEN)
+sp = SpotifyClient(SPOTIFY_CLIENT_ID, SPOTIFY_SECRET_KEY, identifier='STSongSearcher/1.0.0-public')
+bc = BandCamp()
 
 
-    # main program
+# main program
 
-    while True:
-        searchChoice = input("""
+while True:
+    searchChoice = input("""
 [0] Quit
 [1] Random from a seach
 [2] Specific release
 Choose an option: """)
-        print("")
-
-        if searchChoice == "1":
-            release, releaseName, releaseURL = findRandomFromSearch()
-        elif searchChoice == "2":
-            release, releaseName, releaseURL = findSpecificRelease()
-        else:
-            sys.exit()
-            
-        try:
-            tracks = getTracks(release)
-            
-        except:
-            # whenever this shows up it just prints the stack trace
-            # which means an error won't stop the whole program unless i want it to
-            # but i can still see what went wrong when looking at the log
-            #print(traceback.format_exc())
-            continue
-            
-        # only run this code if there was not an exception in the previous try-except (because if the previous step fails, all of this will fail too)
-        else:
-            dirName = str(release.id) + " --- " + str(releaseName)
-            infoName = dirName + "/--- info.txt"
-            try:
-                os.mkdir(dirName)
-            except FileExistsError:
-                print("Warning: Folder for this release already exists. Files will be overwritten.")
-            
-            with open(infoName, "w") as info:
-                info.write(releaseName + "\n")
-                info.write(releaseURL + "\n\n")
-                info.write("Tracklist:\n")
-            
-            # go through the list of tracks one by one
-            for trackSearch in tracks:
-                with open(infoName, "a") as info:
-                    info.write(trackSearch + "\n")
-                
-                txtName = dirName + "/" + trackSearch + ".txt"
-                with open(txtName, "w") as txt:
-                    print("")
-                    print(trackSearch)
-                    txt.write(trackSearch)
-                    
-                    txt.write("\n\n\n=== Spotify ===\n\n")
-                    print("Searching Spotify...")
-                    
-                    try:
-                        spotifySearch(trackSearch)
-                            
-                    except KeyboardInterrupt:
-                        print("")
-                        break
-                        
-                    except:
-                        print(traceback.format_exc())
-                        continue
-                          
-                    txt.write("\n\n\n=== Bandcamp ===\n\n")
-                    print("Searching Bandcamp...")
-                    # this NEEDS to be in a try/except because py_bandcamp is really buggy and throws a lot of errors i can't do anything about
-                    try:
-                        bandcampSearch(trackSearch)
-                        
-                    except KeyboardInterrupt:
-                        print("")
-                        break
-                        
-                    except:
-                        print(traceback.format_exc())
-                        continue
-                    
-                    
-                    txt.write("\n\n\n=== Youtube ===\n\n")
-                    print("Searching YouTube...")
-                    
-                    try:
-                        youtubeSearch(trackSearch)
-                            
-                    except KeyboardInterrupt:
-                        print("")
-                        break
-                        
-                    except:
-                        print(traceback.format_exc())
-                        continue
-                        
-                    print("\n")
-            print("Done.\n\n")
-except:
     print("")
-    sys.exit()
+
+    if searchChoice == "1":
+        release, releaseName, releaseURL = findRandomFromSearch()
+    elif searchChoice == "2":
+        release, releaseName, releaseURL = findSpecificRelease()
+    else:
+        sys.exit()
+        
+    try:
+        tracks = getTracks(release)
+        
+    except:
+        # whenever this shows up it just prints the stack trace
+        # which means an error won't stop the whole program unless i want it to
+        # but i can still see what went wrong when looking at the log
+        #print(traceback.format_exc())
+        continue
+        
+    # only run this code if there was not an exception in the previous try-except (because if the previous step fails, all of this will fail too)
+    else:
+        dirName = str(release.id) + " --- " + str(releaseName).replace("/", "-")
+        infoName = dirName + "/--- info.txt"
+        try:
+            os.mkdir(dirName)
+        except FileExistsError:
+            print("Warning: Folder for this release already exists. Files will be overwritten.")
+        
+        with open(infoName, "w") as info:
+            info.write(releaseName + "\n")
+            info.write(releaseURL + "\n\n")
+            info.write("Tracklist:\n")
+        
+        # go through the list of tracks one by one
+        for trackSearch in tracks:
+            with open(infoName, "a") as info:
+                info.write(trackSearch + "\n")
+            
+            txtName = dirName + "/" + trackSearch.replace("/", "-") + ".txt"
+            with open(txtName, "w") as txt:
+                print("")
+                print(trackSearch)
+                txt.write(trackSearch)
+                
+                txt.write("\n\n\n=== Spotify ===\n\n")
+                print("Searching Spotify...")
+                
+                try:
+                    spotifySearch(trackSearch)
+                        
+                except KeyboardInterrupt:
+                    print("")
+                    break
+                    
+                except:
+                    print(traceback.format_exc())
+                    continue
+                      
+                txt.write("\n\n\n=== Bandcamp ===\n\n")
+                print("Searching Bandcamp...")
+                # this NEEDS to be in a try/except because py_bandcamp is really buggy and throws a lot of errors i can't do anything about
+                try:
+                    bandcampSearch(trackSearch)
+                    
+                except KeyboardInterrupt:
+                    print("")
+                    break
+                    
+                except:
+                    print(traceback.format_exc())
+                    continue
+                
+                
+                txt.write("\n\n\n=== Youtube ===\n\n")
+                print("Searching YouTube...")
+                
+                try:
+                    youtubeSearch(trackSearch)
+                        
+                except KeyboardInterrupt:
+                    print("")
+                    break
+                    
+                except:
+                    print(traceback.format_exc())
+                    continue
+                    
+                print("\n")
+        print("Done.\n\n")
