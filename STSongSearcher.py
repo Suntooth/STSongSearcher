@@ -194,7 +194,6 @@ def bandcampSearch(inp):
             try:
                 itemData = item.get_track_data(item)
             except:
-                itemData = item.get_artist_data(item)
                 itemType = "Artist"
             else:
                 itemType = "Track"
@@ -202,7 +201,7 @@ def bandcampSearch(inp):
             itemType = "Album"
         
         if itemType == "Artist":
-            toWrite = itemType + " --- " + itemData["url"]
+            toWrite = itemType + " --- " + str(item)
             
         else:
             toWrite = (itemData["url"] + " --- " +
