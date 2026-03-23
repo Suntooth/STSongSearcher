@@ -11,7 +11,7 @@ This program is confirmed to work in Python 3.14.3. Any other versions may or ma
 
 ### Packages
 * [`python3-discogs-client`](https://pypi.org/project/python3-discogs-client/)
-* [`spotify_client`](https://pypi.org/project/spotify-client/)
+* [`spotify-client`](https://pypi.org/project/spotify-client/)
 * [`py-bandcamp`](https://pypi.org/project/py-bandcamp/)
 * [`youtube-search`](https://pypi.org/project/youtube-search/)
 
