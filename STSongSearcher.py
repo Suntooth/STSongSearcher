@@ -201,7 +201,7 @@ def bandcampSearch(inp):
             itemType = "Album"
         
         if itemType == "Artist":
-            toWrite = itemType + " --- " + str(item)
+            toWrite = ""
             
         else:
             toWrite = (itemData["url"] + " --- " +
