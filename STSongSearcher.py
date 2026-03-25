@@ -269,7 +269,7 @@ Choose an option: """)
         
     # only run this code if there was not an exception in the previous try-except (because if the previous step fails, all of this will fail too)
     else:
-        dirName = str(release.id) + " --- " + str(releaseName).replace("/", "-")
+        dirName = str(releaseName).replace("/", "-") + " --- " + str(release.id)
         infoName = dirName + "/--- info.txt"
         try:
             os.mkdir(dirName)
