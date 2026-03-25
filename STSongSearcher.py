@@ -249,7 +249,11 @@ Choose an option: """)
     if searchChoice == "1":
         release, releaseName, releaseURL = findRandomFromSearch()
     elif searchChoice == "2":
-        release, releaseName, releaseURL = findSpecificRelease()
+        try:
+            release, releaseName, releaseURL = findSpecificRelease()
+        except discogs_client.exceptions.HTTPError:
+            print("Invalid response. This is usually because the release associated with this ID does not exist or was deleted.")
+            sleep(1)
     else:
         sys.exit()
         
@@ -300,7 +304,6 @@ Choose an option: """)
                     
                 except:
                     print(traceback.format_exc())
-                    continue
                       
                 txt.write("\n\n\n=== Bandcamp ===\n\n")
                 print("Searching Bandcamp...")
@@ -314,7 +317,6 @@ Choose an option: """)
                     
                 except:
                     print(traceback.format_exc())
-                    continue
                 
                 
                 txt.write("\n\n\n=== Youtube ===\n\n")
@@ -329,7 +331,6 @@ Choose an option: """)
                     
                 except:
                     print(traceback.format_exc())
-                    continue
                     
                 print("\n")
         print("Done.\n\n")
