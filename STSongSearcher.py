@@ -231,7 +231,7 @@ def youtubeSearch(inp):
 # initialising the clients
 # youtube doesn't need initialising bc it's not using the api
 # technically bandcamp also isn't using the api (because there isn't an api) but it still needs initialising
-d = discogs_client.Client("STSongSearcher/2.0.0-public", user_token=DISCOGS_TOKEN)
+d = discogs_client.Client("STSongSearcher/2.0.0-public +https://github.com/Suntooth/STSongSearcher", user_token=DISCOGS_TOKEN)
 sp = SpotifyClient(SPOTIFY_CLIENT_ID, SPOTIFY_SECRET_KEY, identifier='STSongSearcher/2.0.0-public')
 bc = BandCamp()
 
