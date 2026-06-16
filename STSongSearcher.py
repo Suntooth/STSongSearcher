@@ -165,11 +165,12 @@ def getTracks(inp):
 
 # search spotify for the track
 def spotifySearch(inp):
-    # search for tracks that match "artist - track", limited to five results since we don't need more than that
-    spResults = sp.search(inp, "track", 5)
+    # search for tracks that match "artist - track"
+    # limited to 20 results because spotify's search method is less accurate the lower the limit. no i don't know why.
+    spResults = sp.search(inp, "track", 20)
     # i originally thought that you were guaranteed to get five results like when searching spotify manually
     # this isn't the case, occasionally you get less. so you have to check how many there are to avoid an error
-    for i in range(len(spResults["tracks"]["items"])):
+    for i in range(min(len(spResults["tracks"]["items"]), 5)):
         # figuring this out sucked. it's just traversing through the dict by looking up keys
         # but also [i] for each individual track because that's a list. and [0] for artists because that's a list
         toWrite = (str(spResults["tracks"]["items"][i]["external_urls"]["spotify"]) + " --- " +
